@@ -1,0 +1,76 @@
+mixin menu(url, name)
+	li #[a(href=`${url}`) #{name}]
+mixin pic(name, ext)
+	picture
+		source(srcset=`img/webp/${name}.webp`, type="image/webp")
+		img(src=`img/${name}.${ext}`)
+
+doctype html
+html(lang="es")
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width,initial-scale=1")
+		title= title
+		link( rel="shortcut icon", type="image/png", href="img/favicon.png" )
+		// build:css css/app.min.css 
+		each css in files.CSS
+			link(rel="stylesheet", href=`../${css}`)
+		// endbuild 
+	body
+		nav.navbar.navbar-inverse
+			.container-fluid
+				.navbar-header
+					button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.navbar-brand(href='#') Portfolio
+				#myNavbar.collapse.navbar-collapse
+					ul.nav.navbar-nav
+						+menu('#home', 'Home')
+						+menu('#about', 'About')
+						+menu('#gallery', 'Gallery')
+						+menu('#contact', 'Contact')
+		.jumbotron
+			.container.text-center
+				h1 My Portfolio
+				p Some text that represents "Me"...
+		.container-fluid.bg-3.text-center
+			h3 Some of my Work
+			br
+			.row
+				.col-sm-3
+					p Some text..
+					+pic('kirby-1', 'jpg')
+				.col-sm-3
+					p Some text..
+					+pic('kirby-2', 'png')
+				.col-sm-3
+					p Some text..
+					+pic('kirby-3', 'jpg')
+				.col-sm-3
+					p Some text..
+					+pic('kirby-4', 'jpg')
+		br
+		.container-fluid.bg-3.text-center
+			.row
+				.col-sm-3
+					p Some text..
+					+pic('kirby-5', 'jpg')
+				.col-sm-3
+					p Some text..
+					+pic('kirby-6', 'jpg')
+				.col-sm-3
+					p Some text..
+					+pic('kirby-7', 'jpg')
+				.col-sm-3
+					p Some text..
+					+pic('kirby-8', 'jpg')
+		br
+		br
+		footer.container-fluid.text-center
+			p Footer Text
+		// build:js js/app.min.js
+		each js in files.JS
+			script(src=`../${js}`)
+		// endbuild 
